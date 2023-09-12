@@ -1,4 +1,13 @@
-let get = async (event) =>{
+import ddb from "@aws-sdk/lib-dynamodb";
+import * as dynamodb from "@aws-sdk/client-dynamodb";
+const docClient = new dynamodb.DynamoDBClient();
+const ddbDocClient = ddb.DynamoDBDocumentClient.from(docClient, {
+    marshallOptions: {
+        removeUndefinedValues: true,
+    },
+})
+
+let getItem = async (event) =>{
     let getDataParams = {
         TableName: "users",
         IndexName: "email-index", //If using secondary key use this line to specify the indexName
@@ -28,4 +37,4 @@ const query_dynamo = async (params) => {
     return data;
 };
 
-module.exports = get;
+module.exports = getItem;

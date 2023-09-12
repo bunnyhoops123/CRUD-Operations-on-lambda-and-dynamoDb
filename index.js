@@ -1,22 +1,32 @@
 import ddb from "@aws-sdk/lib-dynamodb";
 import * as dynamodb from "@aws-sdk/client-dynamodb";
-
-const get = require('./crud/get');
-const put = require('./crud/put');
-const deleteItem = require('./crud/delete');
-const listAppend = require('./crud/update/list-append');
-const setAdd = require('./crud/update/setAdd');
-const setDelete = require('./crud/update/setDelete');
-const setRemove = require('./crud/update/setRemove');
-const setUpdate = require('./crud/update/setUpdate');
-
-
 const docClient = new dynamodb.DynamoDBClient();
 const ddbDocClient = ddb.DynamoDBDocumentClient.from(docClient, {
     marshallOptions: {
         removeUndefinedValues: true,
     },
 })
+
+// const get = require('./crud/get');
+// const put = require('./crud/put');
+// const deleteItem = require('./crud/delete');
+// const listAppend = require('./crud/update/list-append');
+// const setAdd = require('./crud/update/setAdd');
+// const setDelete = require('./crud/update/setDelete');
+// const setRemove = require('./crud/update/setRemove');
+// const setUpdate = require('./crud/update/setUpdate');
+
+import  getItem from './crud/get';
+import  put from './crud/put';
+import deleteItem from './crud/delete';
+import listAppend from  './crud/update/list-append';
+import setAdd from './crud/update/setAdd';
+import setDelete from './crud/update/setDelete';
+import setRemove from './crud/update/setRemove';
+import setUpdate from './crud/update/setUpdate';
+ 
+
+
 
 // const query_dynamo = async (params) => {
 //     let command = new ddb.QueryCommand(params);
@@ -48,7 +58,7 @@ export const handler = async (event) => {
 
     switch(event.operation){
         case "get":
-            get(event);
+            getItem(event);
             break;
         case "put":
             put(event);

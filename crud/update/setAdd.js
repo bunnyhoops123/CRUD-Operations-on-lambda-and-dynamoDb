@@ -1,3 +1,12 @@
+import ddb from "@aws-sdk/lib-dynamodb";
+import * as dynamodb from "@aws-sdk/client-dynamodb";
+const docClient = new dynamodb.DynamoDBClient();
+const ddbDocClient = ddb.DynamoDBDocumentClient.from(docClient, {
+    marshallOptions: {
+        removeUndefinedValues: true,
+    },
+})
+
 let setAdd = async(event) =>{
     let updateParams = {
         TableName: 'users',
